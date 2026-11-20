@@ -9,12 +9,17 @@ package com.lld.patterns.behavioral.strategy;
  */
 public final class FlatDiscount implements DiscountStrategy {
 
+    private final long amountCents;
+
     public FlatDiscount(long amountCents) {
-        throw new UnsupportedOperationException("TODO: validate and store amountCents");
+        if (amountCents < 0) {
+            throw new IllegalArgumentException("amountCents must be >= 0, was " + amountCents);
+        }
+        this.amountCents = amountCents;
     }
 
     @Override
     public long discountCents(long subtotalCents) {
-        throw new UnsupportedOperationException("TODO: implement FlatDiscount");
+        return Math.min(amountCents, subtotalCents);
     }
 }

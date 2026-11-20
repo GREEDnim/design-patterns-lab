@@ -39,7 +39,7 @@ Companion to `rate-limiter-lab`.
 
 | # | Pattern | Write-up | Status |
 |---|---|---|---|
-| 01 | Strategy | [docs/patterns/behavioral/01-strategy.md](docs/patterns/behavioral/01-strategy.md) | 🧪 scaffolded (tests red) |
+| 01 | Strategy | [docs/patterns/behavioral/01-strategy.md](docs/patterns/behavioral/01-strategy.md) | ✅ implemented |
 | 02 | Observer | — | planned |
 | 03 | Command | — | planned |
 | 04 | State | — | planned |

@@ -10,12 +10,17 @@ package com.lld.patterns.behavioral.strategy;
  */
 public final class PercentageDiscount implements DiscountStrategy {
 
+    private final int percent;
+
     public PercentageDiscount(int percent) {
-        throw new UnsupportedOperationException("TODO: validate and store percent");
+        if (percent < 0 || percent > 100) {
+            throw new IllegalArgumentException("percent must be within 0..100, was " + percent);
+        }
+        this.percent = percent;
     }
 
     @Override
     public long discountCents(long subtotalCents) {
-        throw new UnsupportedOperationException("TODO: implement PercentageDiscount");
+        return subtotalCents * percent / 100;
     }
 }

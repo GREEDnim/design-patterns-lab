@@ -13,8 +13,21 @@ package com.lld.patterns.behavioral.strategy;
  */
 public final class TieredDiscount implements DiscountStrategy {
 
+    private static final long MIDDLE_TIER_MIN_CENTS = 10_000;
+    private static final long TOP_TIER_MIN_CENTS = 50_000;
+    private static final int MIDDLE_TIER_PERCENT = 5;
+    private static final int TOP_TIER_PERCENT = 10;
+
     @Override
     public long discountCents(long subtotalCents) {
-        throw new UnsupportedOperationException("TODO: implement TieredDiscount");
+        int percent;
+        if (subtotalCents < MIDDLE_TIER_MIN_CENTS) {
+            percent = 0;
+        } else if (subtotalCents < TOP_TIER_MIN_CENTS) {
+            percent = MIDDLE_TIER_PERCENT;
+        } else {
+            percent = TOP_TIER_PERCENT;
+        }
+        return subtotalCents * percent / 100;
     }
 }

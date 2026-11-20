@@ -9,6 +9,6 @@ public final class NoDiscount implements DiscountStrategy {
 
     @Override
     public long discountCents(long subtotalCents) {
-        throw new UnsupportedOperationException("TODO: implement NoDiscount");
+        return 0;
     }
 }
