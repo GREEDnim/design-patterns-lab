@@ -2,11 +2,13 @@
 
 A Java 21 + JUnit 5 lab for the **classic design patterns**, grouped into the three
 families: **creational**, **structural**, and **behavioral** (plus a few
-backend-flavoured patterns folded into the closest family). Each pattern is a
-problem: a write-up that teaches it, the seam and stubs you implement, and tests
-that are the spec. The learner writes the implementations; the tests are the spec.
+backend-flavoured patterns folded into the closest family).
 
-Companion to `rate-limiter-lab`. Same tools, same habits.
+Each pattern ships a **write-up that teaches it** and a **complete, tested reference
+implementation**. This is a teaching repo: you read the code, run the tests, and ask
+questions — the point is *understanding* the pattern, not re-implementing it.
+
+Companion to `rate-limiter-lab`.
 
 ## Layout
 
@@ -20,26 +22,25 @@ Companion to `rate-limiter-lab`. Same tools, same habits.
 - Cross-cutting production notes live in `docs/production-playbook.md`; reference
   them from write-ups instead of repeating them.
 
-## The role of the seam and stubs
+## Teaching through implementations
 
+- Every pattern ships a **complete, working implementation** plus tests. `mvn test`
+  is green — the repo is a reference you can read and run, not a set of exercises.
 - The **seam** is the small interface the pattern revolves around (e.g.
-  `DiscountStrategy`). It is given; do not change it per concrete implementation.
-- **Stubs** for the classes the learner must write are provided and their bodies
-  throw `UnsupportedOperationException`. Replace the bodies; keep the signatures.
-  Do not weaken the seam to make a stub fit.
-- Write-ups must **not** contain solution code. A pseudocode snippet that states a
-  rule is fine, but it does not replace the explanation.
+  `DiscountStrategy`); concrete classes implement it. Keep the seam tiny and stable.
+- Implementations are held to production standards: immutability where possible,
+  argument validation, deliberate concurrency, and comments that explain *why*.
 
 ## Writing a pattern write-up
 
 A write-up is a **guide that teaches the pattern, not a spec sheet**. Answer **how
-it works** and **why it exists** — not just what to type. Roughly this order:
+it works** and **why it exists** — not just what the code says. Roughly this order:
 
 - **Goal** — what the pattern lets you do, in plain language.
 - **Why the pattern exists** — the smell it removes, shown concretely.
 - **How it works** — the mental model: the roles, how they collaborate, and why the
   arrangement produces the benefit. Derive, don't assert.
-- **The spec** — the seam, the classes to write, and the exact contract.
+- **The spec** — the seam, the classes, and the exact contract.
 - **Production lens** — concurrency/locking, scaling, failure, memory,
   observability. **Calibrated per pattern:** go deep where it is real, one line
   where it is thin, and say "N/A — and here is why" where it genuinely does not
@@ -50,6 +51,10 @@ it works** and **why it exists** — not just what to type. Roughly this order:
   will actually meet it.
 - **Where it lives**, **How to run the tests**.
 
+Every non-obvious decision in the implementation should be explained in the
+write-up (or a code comment): why this data structure, why this lock, why this
+trade-off.
+
 ## Tests
 
 - Two test classes per pattern when concurrency is real:
@@ -57,8 +62,7 @@ it works** and **why it exists** — not just what to type. Roughly this order:
   A pattern with no concurrency story gets only the functional class.
 - Give every `@Test` a comment saying what it verifies and the failure mode it
   guards against.
-- The tests are the spec. Never weaken, delete, or skip an assertion to make an
-  implementation pass; if a test looks wrong, raise it instead of papering over it.
+- Tests document the behaviour a reader should expect; never weaken an assertion.
 
 ## Build and commands
 
@@ -78,13 +82,7 @@ it works** and **why it exists** — not just what to type. Roughly this order:
 
 ## Commits
 
-- **One commit per pattern.** A pattern's write-up, stubs, tests, and its rows in
-  the README go together. Never mix two patterns in one commit.
-- Scaffolding a pattern (write-up + stubs + red tests) and implementing it may be
-  two commits, as in `rate-limiter-lab`; keep them to the one pattern.
+- **One commit per pattern.** A pattern's write-up, reference implementation,
+  tests, and its rows in the README go together. Never mix two patterns in one
+  commit.
 - Repo-wide changes (this file, the README layout, the playbook) may stand alone.
-
-## Skills
-
-- `code` — implement exactly what the user asks and nothing else, without touching
-  or running tests. Load it with `@code`.

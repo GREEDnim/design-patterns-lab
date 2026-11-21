@@ -3,11 +3,10 @@
 A Java 21 + JUnit 5 lab for the **classic design patterns**, grouped into the three
 families: **creational**, **structural**, and **behavioral**.
 
-Each pattern is a problem: a write-up that teaches it, the seam and stubs you
-implement, and tests that are the spec. **You write the code; the tests are the
-spec.** We build the patterns one at a time, deepest-first, each with a
-production lens (concurrency, scaling, failure) calibrated to where it actually
-matters.
+Each pattern ships a **write-up that teaches it** and a **complete, tested reference
+implementation**. This is a **teaching repo**: read the code, run the tests, ask
+questions — the goal is understanding each pattern and its production lens
+(concurrency, scaling, failure), not re-implementing it.
 
 Companion to `rate-limiter-lab`.
 
@@ -39,8 +38,8 @@ Companion to `rate-limiter-lab`.
 
 | # | Pattern | Write-up | Status |
 |---|---|---|---|
-| 01 | Strategy | [docs/patterns/behavioral/01-strategy.md](docs/patterns/behavioral/01-strategy.md) | ✅ implemented |
-| 02 | Observer | [docs/patterns/behavioral/02-observer.md](docs/patterns/behavioral/02-observer.md) | ✅ implemented |
+| 01 | Strategy | [docs/patterns/behavioral/01-strategy.md](docs/patterns/behavioral/01-strategy.md) | ✅ done |
+| 02 | Observer | [docs/patterns/behavioral/02-observer.md](docs/patterns/behavioral/02-observer.md) | ✅ done |
 | 03 | Command | — | planned |
 | 04 | State | — | planned |
 | 05 | Template Method | — | planned |
@@ -53,15 +52,15 @@ Companion to `rate-limiter-lab`.
 *Read-only (no build here): Bridge, Flyweight, Visitor, Memento — covered as notes
 inside the write-ups that neighbour them.*
 
-## How to work a pattern
+## How to read a pattern
 
-1. Read its write-up in `docs/patterns/…`.
-2. Implement the stubbed classes in `src/main/java/…` — the write-up is the spec.
-3. Run its tests until green:
+1. Read the write-up in `docs/patterns/…` — it teaches the pattern and its
+   production lens.
+2. Read the reference implementation in `src/main/java/…`.
+3. Run its tests and watch the behaviour:
    ```bash
    mvn -Dtest='com.lld.patterns.<family>.<pattern>.*Test' test
    ```
-4. Commit the pattern (see `AGENTS.md` for the one-commit-per-pattern rule).
 
 ## Run the tests
 
@@ -69,10 +68,10 @@ inside the write-ups that neighbour them.*
 mvn test
 ```
 
-One pattern at a time, for example Strategy:
+One pattern at a time, for example Observer:
 
 ```bash
-mvn -Dtest='com.lld.patterns.behavioral.strategy.*Test' test
+mvn -Dtest='com.lld.patterns.behavioral.observer.*Test' test
 ```
 
 ## Layout
@@ -80,7 +79,7 @@ mvn -Dtest='com.lld.patterns.behavioral.strategy.*Test' test
 - `docs/patterns/<family>/NN-<pattern>.md` — one teaching write-up per pattern.
 - `docs/production-playbook.md` — cross-cutting production topics (concurrency,
   scaling, backpressure, idempotency, caching, observability).
-- `src/main/java/com/lld/patterns/<family>/<pattern>/` — the seam, plus stubs to
-  implement.
+- `src/main/java/com/lld/patterns/<family>/<pattern>/` — the seam and the reference
+  implementation.
 - `src/test/java/com/lld/patterns/<family>/<pattern>/` — the pattern's tests.
 - `src/test/java/com/lld/support/` — shared test support, when a pattern needs it.
